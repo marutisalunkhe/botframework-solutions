@@ -917,6 +917,17 @@ namespace PointOfInterestSkill.Dialogs
             return turnContext.IsSkill() || Channel.GetChannelId(turnContext) != Channels.Msteams;
         }
 
+        protected ResponseObject ConvertToResponse(PointOfInterestModel model)
+        {
+            var response = new ResponseObject();
+            response.Name = model.Name;
+            response.Latitude = model.Geolocation.Latitude;
+            response.Longitude = model.Geolocation.Longitude;
+            response.Telephone = model.Phone;
+            response.Address = model.Address;
+            return response;
+        }
+
         private string GetCardImageUri(string imagePath)
         {
             var serverUrl = _httpContext.HttpContext.Request.Scheme + "://" + _httpContext.HttpContext.Request.Host.Value;
