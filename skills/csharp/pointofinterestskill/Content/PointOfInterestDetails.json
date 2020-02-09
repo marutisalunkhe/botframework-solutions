@@ -41,7 +41,7 @@
                           "size": "Large",
                           "weight": "Bolder",
                           "color": "Light",
-                          "text": "{CardTitle}"
+                          "text": "@{Data.CardTitle}"
                         }
                       ],
                       "width": "stretch"
@@ -66,21 +66,21 @@
           "size": "Medium",
           "weight": "Bolder",
           "color": "Accent",
-          "text": "{Name}"
+          "text": "@{Data.Name}"
         },
         {
           "type": "TextBlock",
           "id": "AvailableDetails",
           "spacing": "None",
           "color": "default",
-          "text": "{AvailableDetails}"
+          "text": "@{Data.AvailableDetails}"
         },
         {
           "type": "TextBlock",
           "id": "Address",
           "spacing": "None",
           "color": "default",
-          "text": "{Address}",
+          "text": "@{Data.Address}",
           "wrap": true,
           "maxLines": 2
         },
@@ -89,7 +89,7 @@
           "id": "Hours",
           "spacing": "None",
           "color": "default",
-          "text": "{Hours}",
+          "text": "@{Data.Hours}",
           "wrap": true
         }
       ]
@@ -101,7 +101,7 @@
         {
           "type": "Image",
           "horizontalAlignment": "center",
-          "url": "{PointOfInterestImageUrl}"
+          "url": "@{Data.PointOfInterestImageUrl}"
         }
       ]
     },
@@ -110,18 +110,18 @@
       "actions": [
         {
           "type": "Action.Submit",
-          "title": "{ActionCall}",
-          "data": "{ActionCall}"
+          "title": "@{Data.ActionCall}",
+          "data": "@{Data.ActionCall}"
         },
         {
           "type": "Action.Submit",
-          "title": "{ActionShowDirections}",
-          "data": "{ActionShowDirections}"
+          "title": "@{Data.ActionShowDirections}",
+          "data": "@{Data.ActionShowDirections}"
         },
         {
           "type": "Action.Submit",
-          "title": "{ActionStartNavigation}",
-          "data": "{ActionStartNavigation}"
+          "title": "@{Data.ActionStartNavigation}",
+          "data": "@{Data.ActionStartNavigation}"
         }
       ]
     },
@@ -134,12 +134,12 @@
           "horizontalAlignment": "Right",
           "size": "Small",
           "color": "default",
-          "text": "{ProviderDisplayText}"
+          "text": "@{Data.ProviderDisplayText}"
         }
       ]
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.0",
-  "speak": "{Speak}"
+  "speak": "@{Data.Speak}"
 }

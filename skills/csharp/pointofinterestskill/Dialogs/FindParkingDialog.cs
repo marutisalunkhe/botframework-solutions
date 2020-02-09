@@ -26,10 +26,11 @@ namespace PointOfInterestSkill.Dialogs
             ResponseManager responseManager,
             ConversationState conversationState,
             RouteDialog routeDialog,
+            IServiceProvider serviceProvider,
             IServiceManager serviceManager,
             IBotTelemetryClient telemetryClient,
             IHttpContextAccessor httpContext)
-            : base(nameof(FindParkingDialog), settings, services, responseManager, conversationState, serviceManager, telemetryClient, httpContext)
+            : base(nameof(FindParkingDialog), settings, services, responseManager, conversationState, serviceProvider, serviceManager, telemetryClient, httpContext)
         {
             TelemetryClient = telemetryClient;
 

@@ -29,10 +29,11 @@ namespace PointOfInterestSkill.Dialogs
             BotServices services,
             ResponseManager responseManager,
             ConversationState conversationState,
+            IServiceProvider serviceProvider,
             IServiceManager serviceManager,
             IBotTelemetryClient telemetryClient,
             IHttpContextAccessor httpContext)
-            : base(nameof(RouteDialog), settings, services, responseManager, conversationState, serviceManager, telemetryClient, httpContext)
+            : base(nameof(RouteDialog), settings, services, responseManager, conversationState, serviceProvider, serviceManager, telemetryClient, httpContext)
         {
             TelemetryClient = telemetryClient;
 
@@ -219,7 +220,7 @@ namespace PointOfInterestSkill.Dialogs
                 }
                 else if (cards.Count() == 1)
                 {
-                    return await sc.PromptAsync(Actions.StartNavigationPrompt, new PromptOptions { Prompt = ResponseManager.GetCardResponse(cards[0]) });
+                    return await sc.PromptAsync(Actions.StartNavigationPrompt, new PromptOptions { Prompt = EngineWrapper.GetCardResponse(cards[0]) });
                 }
                 else
                 {
@@ -306,7 +307,7 @@ namespace PointOfInterestSkill.Dialogs
                     {
                         { "Id", (i + 1).ToString() },
                     };
-                var suggestedActionValue = ResponseManager.GetResponse(RouteResponses.RouteSuggestedActionName, promptReplacements).Text;
+                var suggestedActionValue = EngineWrapper.GetResponse(RouteResponses.RouteSuggestedActionName, promptReplacements).Text;
 
                 var choice = new Choice()
                 {
@@ -317,7 +318,7 @@ namespace PointOfInterestSkill.Dialogs
                 (cards[i].Data as RouteDirectionsModel).SubmitText = suggestedActionValue;
             }
 
-            options.Prompt = cards == null ? ResponseManager.GetResponse(prompt) : ResponseManager.GetCardResponse(prompt, cards);
+            options.Prompt = cards == null ? ResponseManager.GetResponse(prompt) : EngineWrapper.GetCardResponse(prompt, cards);
             options.Prompt.Speak = SpeechUtility.ListToSpeechReadyString(options.Prompt);
 
             return options;

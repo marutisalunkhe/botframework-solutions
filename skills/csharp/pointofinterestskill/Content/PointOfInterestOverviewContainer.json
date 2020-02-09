@@ -33,7 +33,7 @@
                   "size": "Large",
                   "weight": "Bolder",
                   "color": "Light",
-                  "text": "{CardTitle}"
+                  "text": "@{Data.CardTitle}"
                 }
               ],
               "width": "stretch"
@@ -49,7 +49,7 @@
       "items": [
         {
           "type": "Image",
-          "url": "{PointOfInterestImageUrl}",
+          "url": "@{Data.PointOfInterestImageUrl}",
           "horizontalAlignment": "center"
         }
       ]
@@ -58,6 +58,7 @@
       "type": "Container",
       "id": "Container",
       "items": [
+        @{join(foreach(Cards,Card,CreateStringNoContainer(Card.Name,Card.Data)),',')}
       ]
     },
     {
@@ -69,7 +70,7 @@
           "horizontalAlignment": "Right",
           "size": "Small",
           "color": "default",
-          "text": "{ProviderDisplayText}"
+          "text": "@{Data.ProviderDisplayText}"
         }
       ]
     }

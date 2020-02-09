@@ -1,0 +1,82 @@
+﻿# RouteSuggestedActionName(Data, Cards, Layout)
+[Activity
+Text = @{RouteSuggestedActionName.Text(Data)}
+Speak = @{RouteSuggestedActionName.Text(Data)}
+Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
+AttachmentLayout = @{Layout}
+]
+
+# RouteSuggestedActionName.Text(Data)
+- Route @{Data.Id}
+
+
+
+# MultipleRoutesFound(Data, Cards, Layout)
+[Activity
+Text = @{MultipleRoutesFound.Text(Data)}
+Speak = @{MultipleRoutesFound.Text(Data)}
+Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
+AttachmentLayout = @{Layout}
+]
+
+# MultipleRoutesFound.Text(Data)
+- I found several routes to your destination.
+- There are multiple routes to your destination.
+
+
+
+# MultipleLocationsFound(Data, Cards, Layout)
+[Activity
+Text = @{MultipleLocationsFound.Text(Data)}
+Speak = @{MultipleLocationsFound.Text(Data)}
+Attachments = @{CreateCard(Layout, Cards)}
+]
+
+# MultipleLocationsFound.Text(data)
+- I found the following.
+- Here are some options.
+- What do you think of these?
+
+
+
+# CurrentLocationSingleSelection(Data, Cards, Layout)
+[Activity
+Text = @{CurrentLocationSingleSelection.Text(Data)}
+Speak = @{CurrentLocationSingleSelection.Text(Data)}
+Attachments = @{CreateCard(Layout, Cards)}
+]
+
+# CurrentLocationSingleSelection.Text(Data)
+- This one?
+
+
+
+# CurrentLocationMultipleSelection(Data, Cards, Layout)
+[Activity
+Text = @{CurrentLocationMultipleSelection.Text(Data)}
+Speak = @{CurrentLocationMultipleSelection.Text(Data)}
+Attachments = @{CreateCard(Layout, Cards)}
+]
+
+# CurrentLocationMultipleSelection.Text(Data)
+- Which one?
+- One of these?
+
+
+
+# CardsOnly(Data, Cards, Layout)
+[Activity
+Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
+AttachmentLayout = @{Layout}
+]
+
+
+
+# CreateStringNoContainer(Name, Data)
+- @{fromFile(Name)}
+
+# CreateString(Name, Data, Cards)
+- @{fromFile(Name)}
+
+# CreateCard(Card, Cards)
+- @{ActivityAttachment(json(CreateString(Card.Name, Card.Data, Cards)), 'adaptiveCard')}

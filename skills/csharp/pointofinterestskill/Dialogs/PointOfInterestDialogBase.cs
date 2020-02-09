@@ -21,6 +21,7 @@ using Microsoft.Bot.Solutions;
 using Microsoft.Bot.Solutions.Models;
 using Microsoft.Bot.Solutions.Responses;
 using Microsoft.Bot.Solutions.Util;
+using Microsoft.Extensions.DependencyInjection;
 using PointOfInterestSkill.Models;
 using PointOfInterestSkill.Responses.FindPointOfInterest;
 using PointOfInterestSkill.Responses.Shared;
@@ -68,6 +69,7 @@ namespace PointOfInterestSkill.Dialogs
             BotServices services,
             ResponseManager responseManager,
             ConversationState conversationState,
+            IServiceProvider serviceProvider,
             IServiceManager serviceManager,
             IBotTelemetryClient telemetryClient,
             IHttpContextAccessor httpContext)
@@ -76,6 +78,7 @@ namespace PointOfInterestSkill.Dialogs
             Settings = settings;
             Services = services;
             ResponseManager = responseManager;
+            EngineWrapper = serviceProvider.GetService<EngineWrapper>();
             Accessor = conversationState.CreateProperty<PointOfInterestSkillState>(nameof(PointOfInterestSkillState));
             ServiceManager = serviceManager;
             TelemetryClient = telemetryClient;
@@ -110,6 +113,8 @@ namespace PointOfInterestSkill.Dialogs
         protected IServiceManager ServiceManager { get; set; }
 
         protected ResponseManager ResponseManager { get; set; }
+
+        protected EngineWrapper EngineWrapper { get; set; }
 
         public static Activity CreateOpenDefaultAppReply(Activity activity, PointOfInterestModel destination, OpenDefaultAppType type)
         {
@@ -470,11 +475,11 @@ namespace PointOfInterestSkill.Dialogs
 
                     if (promptResponse == null)
                     {
-                        options.Prompt = ResponseManager.GetCardResponse(card);
+                        options.Prompt = EngineWrapper.GetCardResponse(card);
                     }
                     else
                     {
-                        options.Prompt = ResponseManager.GetCardResponse(promptResponse, card, null);
+                        options.Prompt = EngineWrapper.GetCardResponse(promptResponse, card, null);
                     }
 
                     return await sc.PromptAsync(Actions.SelectActionPrompt, options);
@@ -597,7 +602,7 @@ namespace PointOfInterestSkill.Dialogs
                 pointOfInterestList[0].SubmitText = GetConfirmPromptTrue();
             }
 
-            options.Prompt = ResponseManager.GetCardResponse(prompt, containerCard, null, container, cards);
+            options.Prompt = EngineWrapper.GetCardResponse(prompt, containerCard, null, container, cards);
 
             // Restore Value to SubmitText
             for (var i = 0; i < pointOfInterestList.Count; ++i)

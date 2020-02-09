@@ -40,7 +40,7 @@
                           "size": "Large",
                           "weight": "Bolder",
                           "color": "Light",
-                          "text": "{CardTitle}"
+                          "text": "@{Data.CardTitle}"
                         }
                       ],
                       "width": "stretch"
@@ -65,21 +65,21 @@
           "size": "Medium",
           "weight": "Bolder",
           "color": "default",
-          "text": "{Name}"
+          "text": "@{Data.Name}"
         },
         {
           "type": "TextBlock",
           "id": "AvailableDetails",
           "spacing": "None",
           "color": "default",
-          "text": "{AvailableDetails}"
+          "text": "@{Data.AvailableDetails}"
         },
         {
           "type": "TextBlock",
           "id": "Address",
           "spacing": "None",
           "color": "default",
-          "text": "{Address}",
+          "text": "@{Data.Address}",
           "wrap": true,
           "maxLines": 2
         },
@@ -88,7 +88,7 @@
           "id": "Hours",
           "spacing": "None",
           "color": "default",
-          "text": "{Hours}",
+          "text": "@{Data.Hours}",
           "wrap": true
         }
       ]
@@ -100,7 +100,7 @@
         {
           "type": "Image",
           "horizontalAlignment": "center",
-          "url": "{PointOfInterestImageUrl}"
+          "url": "@{Data.PointOfInterestImageUrl}"
         }
       ]
     },
@@ -122,7 +122,7 @@
                   "horizontalAlignment": "Center",
                   "size": "Medium",
                   "color": "default",
-                  "text": "{TravelTime}"
+                  "text": "@{Data.TravelTime}"
                 }
               ],
               "width": 20
@@ -134,7 +134,7 @@
                 {
                   "type": "TextBlock",
                   "horizontalAlignment": "Left",
-                  "text": "{DelayStatus}"
+                  "text": "@{Data.DelayStatus}"
                 },
                 {
                   "type": "TextBlock",
@@ -155,7 +155,7 @@
                   "horizontalAlignment": "Center",
                   "size": "Medium",
                   "color": "default",
-                  "text": "{Distance}"
+                  "text": "@{Data.Distance}"
                 }
               ],
               "width": 20
@@ -169,8 +169,8 @@
       "actions": [
         {
           "type": "Action.Submit",
-          "title": "{ActionStartNavigation}",
-          "data": "{ActionStartNavigation}"
+          "title": "@{Data.ActionStartNavigation}",
+          "data": "@{Data.ActionStartNavigation}"
         }
       ]
     },
@@ -183,16 +183,16 @@
           "horizontalAlignment": "Right",
           "size": "Small",
           "color": "default",
-          "text": "{ProviderDisplayText}"
+          "text": "@{Data.ProviderDisplayText}"
         }
       ]
     }
   ],
   "selectAction": {
     "type": "Action.Submit",
-    "data": "{SubmitText}"
+    "data": "@{Data.SubmitText}"
   },
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.0",
-  "speak": "{Speak}"
+  "speak": "@{Data.Speak}"
 }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -21,10 +22,11 @@ namespace PointOfInterestSkill.Dialogs
             BotServices services,
             ResponseManager responseManager,
             ConversationState conversationState,
+            IServiceProvider serviceProvider,
             IServiceManager serviceManager,
             IBotTelemetryClient telemetryClient,
             IHttpContextAccessor httpContext)
-            : base(nameof(GetDirectionsDialog), settings, services, responseManager, conversationState, serviceManager, telemetryClient, httpContext)
+            : base(nameof(GetDirectionsDialog), settings, services, responseManager, conversationState, serviceProvider, serviceManager, telemetryClient, httpContext)
         {
             TelemetryClient = telemetryClient;
 

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,7 @@ using PointOfInterestSkill.Responses.Shared;
 using PointOfInterestSkill.Services;
 using PointOfInterestSkill.Tests.API.Fakes;
 using PointOfInterestSkill.Tests.Flow.Utterances;
+using PointOfInterestSkill.Utilities;
 using SkillServiceLibrary.Fakes.AzureMapsAPI.Fakes;
 
 namespace PointOfInterestSkill.Tests.Flow
@@ -87,6 +89,35 @@ namespace PointOfInterestSkill.Tests.Flow
                 new CancelRouteResponses());
 
             Services.AddSingleton(ResponseManager);
+
+            // Configure localized responses
+            var supportedLocales = new List<string>() { "en-us" };
+            var templateFiles = new Dictionary<string, string>
+            {
+                { "Shared", "ResponsesAndTexts" },
+            };
+
+            var localizedTemplates = new Dictionary<string, List<string>>();
+            foreach (var locale in supportedLocales)
+            {
+                var localeTemplateFiles = new List<string>();
+                foreach (var (dialog, template) in templateFiles)
+                {
+                    // LG template for default locale should not include locale in file extension.
+                    if (locale.Equals("en-us"))
+                    {
+                        localeTemplateFiles.Add(Path.Combine(".", "Responses", dialog, $"{template}.lg"));
+                    }
+                    else
+                    {
+                        localeTemplateFiles.Add(Path.Combine(".", "Responses", dialog, $"{template}.{locale}.lg"));
+                    }
+                }
+
+                localizedTemplates.Add(locale, localeTemplateFiles);
+            }
+
+            Services.AddSingleton(new EngineWrapper(localizedTemplates, "en-us"));
 
             Services.AddSingleton<IServiceManager, MockServiceManager>();
             Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
