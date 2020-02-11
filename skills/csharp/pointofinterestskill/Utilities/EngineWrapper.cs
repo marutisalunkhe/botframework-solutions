@@ -86,6 +86,11 @@ namespace PointOfInterestSkill.Utilities
             return GetCardResponse(templateId, Array.Empty<Card>(), tokens);
         }
 
+        public string GetString(string templateId)
+        {
+            return GenerateActivityForLocale(templateId + ".Text").Text;
+        }
+
         private Card Convert(Card card)
         {
             return new Card { Name = PathBase + card.Name + ".json", Data = card.Data };

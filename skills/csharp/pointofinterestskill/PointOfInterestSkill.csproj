@@ -225,6 +225,9 @@
       <LastGenOutput>RouteResponses.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
+    <None Update="Responses\Shared\PointOfInterestSharedStringsNew.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
     <None Update="Responses\Shared\POISharedResponses.tt">
       <LastGenOutput>POISharedResponses.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>

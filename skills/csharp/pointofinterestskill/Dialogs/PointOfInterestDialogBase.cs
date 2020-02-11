@@ -449,13 +449,15 @@ namespace PointOfInterestSkill.Dialogs
                         Choices = new List<Choice>()
                     };
 
+                    var startNavigation = EngineWrapper.GetString(PointOfInterestSharedStringsNew.START_NAVIGATION);
+
                     if (!string.IsNullOrEmpty(state.Destination.Phone))
                     {
                         options.Choices.Add(new Choice { Value = PointOfInterestSharedStrings.CALL });
                     }
 
                     options.Choices.Add(new Choice { Value = PointOfInterestSharedStrings.SHOW_DIRECTIONS });
-                    options.Choices.Add(new Choice { Value = PointOfInterestSharedStrings.START_NAVIGATION });
+                    options.Choices.Add(new Choice { Value = startNavigation });
 
                     var mapsService = ServiceManager.InitMapsService(Settings, sc.Context.Activity.Locale);
                     state.Destination = await mapsService.GetPointOfInterestDetailsAsync(state.Destination, ImageSize.DetailsWidth, ImageSize.DetailsHeight);
@@ -465,7 +467,7 @@ namespace PointOfInterestSkill.Dialogs
                     state.Destination.CardTitle = PointOfInterestSharedStrings.CARD_TITLE;
                     state.Destination.ActionCall = PointOfInterestSharedStrings.CALL;
                     state.Destination.ActionShowDirections = PointOfInterestSharedStrings.SHOW_DIRECTIONS;
-                    state.Destination.ActionStartNavigation = PointOfInterestSharedStrings.START_NAVIGATION;
+                    state.Destination.ActionStartNavigation = startNavigation;
 
                     var card = new Card
                     {
