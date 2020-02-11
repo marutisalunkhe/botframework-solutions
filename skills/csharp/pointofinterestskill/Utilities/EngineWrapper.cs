@@ -91,7 +91,7 @@ namespace PointOfInterestSkill.Utilities
             return new Card { Name = PathBase + card.Name + ".json", Data = card.Data };
         }
 
-        private IDictionary<string, string> Convert(StringDictionary tokens)
+        public static IDictionary<string, string> Convert(StringDictionary tokens)
         {
             var dict = new Dictionary<string, string>();
             if (tokens != null)

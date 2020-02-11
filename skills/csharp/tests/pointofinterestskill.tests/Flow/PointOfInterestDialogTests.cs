@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Schema;
@@ -15,6 +16,7 @@ using PointOfInterestSkill.Responses.Main;
 using PointOfInterestSkill.Responses.Shared;
 using PointOfInterestSkill.Tests.Flow.Strings;
 using PointOfInterestSkill.Tests.Flow.Utterances;
+using PointOfInterestSkill.Utilities;
 
 namespace PointOfInterestSkill.Tests.Flow
 {
@@ -425,6 +427,22 @@ namespace PointOfInterestSkill.Tests.Flow
 
                 AssertSameId(messageActivity, cardIds);
             };
+        }
+
+        private new string[] ParseReplies(string name, StringDictionary data = null)
+        {
+            if (name == Responses.Shared.Responses.MultipleLocationsFound)
+            {
+                var input = new
+                {
+                    Data = EngineWrapper.Convert(data)
+                };
+                return TemplateEngine.TemplateEnginesPerLocale[CultureInfo.CurrentUICulture.Name].ExpandTemplate(name + ".Text", input).ToArray();
+            }
+            else
+            {
+                return base.ParseReplies(name, data);
+            }
         }
 
         private void AssertSameId(IMessageActivity activity, IList<string> cardIds = null)

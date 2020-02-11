@@ -37,6 +37,8 @@ namespace PointOfInterestSkill.Tests.Flow
     {
         public IServiceCollection Services { get; set; }
 
+        public LocaleTemplateEngineManager TemplateEngine { get; set; }
+
         [TestInitialize]
         public override void Initialize()
         {
@@ -117,7 +119,8 @@ namespace PointOfInterestSkill.Tests.Flow
                 localizedTemplates.Add(locale, localeTemplateFiles);
             }
 
-            Services.AddSingleton(new EngineWrapper(localizedTemplates, "en-us"));
+            TemplateEngine = new EngineWrapper(localizedTemplates, "en-us");
+            Services.AddSingleton((EngineWrapper)TemplateEngine);
 
             Services.AddSingleton<IServiceManager, MockServiceManager>();
             Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
