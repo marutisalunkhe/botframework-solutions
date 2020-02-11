@@ -95,6 +95,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>POISharedResponses.tt</DependentUpon>
     </Compile>
+    <Compile Update="Responses\Shared\Responses.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Responses.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup>
@@ -227,7 +232,17 @@
     <None Update="Responses\Shared\ResponseIdCollection.t4">
       <Generator></Generator>
     </None>
+    <None Update="Responses\Shared\Responses.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Responses\Shared\Responses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Responses.cs</LastGenOutput>
+    </None>
     <None Update="Responses\Shared\ResponsesAndTexts.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Responses\Shared\ResponsesTexts.lg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

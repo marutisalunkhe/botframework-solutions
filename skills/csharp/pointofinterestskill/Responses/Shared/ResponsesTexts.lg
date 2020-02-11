@@ -1,0 +1,21 @@
+﻿[import](Responses.lg)
+
+# RouteSuggestedActionName.Text(Data)
+- Route @{Data.Id}
+
+# MultipleRoutesFound.Text(Data)
+- I found several routes to your destination.
+- There are multiple routes to your destination.
+
+# MultipleLocationsFound.Text(data)
+- I found the following.
+- Here are some options.
+- What do you think of these?
+
+# CurrentLocationSingleSelection.Text(Data)
+- This one?
+
+# CurrentLocationMultipleSelection.Text(Data)
+- Which one?
+- One of these?
+
