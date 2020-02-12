@@ -28,8 +28,8 @@ namespace PointOfInterestSkill.Utilities
 [Activity
 Text = @{{{name}.Text(Data)}}
 Speak = @{{{name}.Text(Data)}}
-Attachments = @{{foreach(Cards, Card, CreateCard(Card, null))}}
-AttachmentLayout = @{{Layout}}
+Attachments = @{{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}}
+AttachmentLayout = @{{if(Layout==null,'list',Layout)}}
 ]
 ");
                     textFile.WriteLine($@"# {name}.Text(Data)

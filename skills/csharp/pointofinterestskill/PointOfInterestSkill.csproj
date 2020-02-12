@@ -225,8 +225,14 @@
       <LastGenOutput>RouteResponses.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
+    <None Update="Responses\Shared\PointOfInterestSharedStringsNew.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Responses\Shared\PointOfInterestSharedStringsNew.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Responses\Shared\PointOfInterestSharedStringsNewTexts.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Responses\Shared\POISharedResponses.tt">
       <LastGenOutput>POISharedResponses.cs</LastGenOutput>
@@ -246,6 +252,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Responses\Shared\ResponsesTexts.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Responses\Shared\Shared.lg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

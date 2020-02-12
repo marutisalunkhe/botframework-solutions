@@ -2,35 +2,38 @@
 [Activity
 Text = @{RouteSuggestedActionName.Text(Data)}
 Speak = @{RouteSuggestedActionName.Text(Data)}
-Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
-AttachmentLayout = @{Layout}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]
 
 # MultipleRoutesFound(Data, Cards, Layout)
 [Activity
 Text = @{MultipleRoutesFound.Text(Data)}
 Speak = @{MultipleRoutesFound.Text(Data)}
-Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
-AttachmentLayout = @{Layout}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]
 
 # MultipleLocationsFound(Data, Cards, Layout)
 [Activity
 Text = @{MultipleLocationsFound.Text(Data)}
 Speak = @{MultipleLocationsFound.Text(Data)}
-Attachments = @{CreateCard(Layout, Cards)}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]
 
 # CurrentLocationSingleSelection(Data, Cards, Layout)
 [Activity
 Text = @{CurrentLocationSingleSelection.Text(Data)}
 Speak = @{CurrentLocationSingleSelection.Text(Data)}
-Attachments = @{CreateCard(Layout, Cards)}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]
 
 # CurrentLocationMultipleSelection(Data, Cards, Layout)
 [Activity
 Text = @{CurrentLocationMultipleSelection.Text(Data)}
 Speak = @{CurrentLocationMultipleSelection.Text(Data)}
-Attachments = @{CreateCard(Layout, Cards)}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]

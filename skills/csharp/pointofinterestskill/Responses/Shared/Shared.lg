@@ -1,7 +1,7 @@
 ﻿# CardsOnly(Data, Cards, Layout)
 [Activity
-Attachments = @{foreach(Cards, Card, CreateCard(Card, null))}
-AttachmentLayout = @{Layout}
+Attachments = @{if(Cards==null,null,foreach(Cards, Card, CreateCard(Card)))}
+AttachmentLayout = @{if(Layout==null,'list',Layout)}
 ]
 
 
@@ -11,5 +11,5 @@ AttachmentLayout = @{Layout}
 # CreateString(Name, Data, Cards)
 - @{fromFile(Name)}
 
-# CreateCard(Card, Cards)
-- @{ActivityAttachment(json(CreateString(Card.Name, Card.Data, Cards)), 'adaptiveCard')}
+# CreateCard(Card)
+- @{ActivityAttachment(json(CreateString(Card.Name, Card.Data, Card.Cards)), 'adaptiveCard')}

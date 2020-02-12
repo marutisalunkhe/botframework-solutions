@@ -62,12 +62,11 @@ namespace PointOfInterestSkill.Utilities
 
         public Activity GetCardResponse(string templateId, Card card, StringDictionary tokens = null, string containerName = null, IEnumerable<Card> containerItems = null)
         {
-            // throw new Exception("1. only keep body in containee;2. in the container, write @{join(foreach(Cards,Card,CreateStringNoContainer(Card.Name,Card.Data)),',')};3. replace Attachments with @{CreateCard(Layout, Cards)}, remove AttachmentLayout");
+            // throw new Exception("1. only keep body in containee;2. in the container, write @{join(foreach(Cards,Card,CreateStringNoContainer(Card.Name,Card.Data)),',')};");
             var input = new
             {
                 Data = Convert(tokens),
-                Cards = containerItems.Select((card) => { return Convert(card); }).ToArray(),
-                Layout = Convert(card),
+                Cards = new CardExt[] { Convert(card, containerItems) },
             };
             try
             {
@@ -91,9 +90,14 @@ namespace PointOfInterestSkill.Utilities
             return GenerateActivityForLocale(templateId + ".Text").Text;
         }
 
-        private Card Convert(Card card)
+        private CardExt Convert(Card card, IEnumerable<Card> containerItems = null)
         {
-            return new Card { Name = PathBase + card.Name + ".json", Data = card.Data };
+            var res = new CardExt { Name = PathBase + card.Name + ".json", Data = card.Data };
+            if (containerItems != null)
+            {
+                res.Cards = containerItems.Select((card) => Convert(card)).ToList();
+            }
+            return res;
         }
 
         public static IDictionary<string, string> Convert(StringDictionary tokens)
@@ -108,6 +112,11 @@ namespace PointOfInterestSkill.Utilities
             }
 
             return dict;
+        }
+
+        public class CardExt : Card
+        {
+            public List<CardExt> Cards { get; set; }
         }
     }
 }
