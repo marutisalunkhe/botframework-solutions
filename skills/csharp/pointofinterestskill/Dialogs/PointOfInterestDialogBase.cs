@@ -78,7 +78,7 @@ namespace PointOfInterestSkill.Dialogs
             Settings = settings;
             Services = services;
             ResponseManager = responseManager;
-            EngineWrapper = serviceProvider.GetService<EngineWrapper>();
+            EngineWrapper = serviceProvider.GetService<LocaleTemplateEngineManager>();
             Accessor = conversationState.CreateProperty<PointOfInterestSkillState>(nameof(PointOfInterestSkillState));
             ServiceManager = serviceManager;
             TelemetryClient = telemetryClient;
@@ -114,7 +114,7 @@ namespace PointOfInterestSkill.Dialogs
 
         protected ResponseManager ResponseManager { get; set; }
 
-        protected EngineWrapper EngineWrapper { get; set; }
+        protected LocaleTemplateEngineManager EngineWrapper { get; set; }
 
         public static Activity CreateOpenDefaultAppReply(Activity activity, PointOfInterestModel destination, OpenDefaultAppType type)
         {

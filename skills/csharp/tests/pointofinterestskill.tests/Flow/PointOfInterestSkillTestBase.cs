@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Security.Claims;
 using System.Threading;
@@ -119,8 +121,8 @@ namespace PointOfInterestSkill.Tests.Flow
                 localizedTemplates.Add(locale, localeTemplateFiles);
             }
 
-            TemplateEngine = new EngineWrapper(localizedTemplates, "en-us");
-            Services.AddSingleton((EngineWrapper)TemplateEngine);
+            TemplateEngine = new LocaleTemplateEngineManager(localizedTemplates, "en-us");
+            Services.AddSingleton(TemplateEngine);
 
             Services.AddSingleton<IServiceManager, MockServiceManager>();
             Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
@@ -172,6 +174,22 @@ namespace PointOfInterestSkill.Tests.Flow
             });
 
             return testFlow;
+        }
+
+        protected new string[] ParseReplies(string name, StringDictionary data = null)
+        {
+            if (name == Responses.Shared.Responses.MultipleLocationsFound)
+            {
+                var input = new
+                {
+                    Data = EngineWrapper.Convert(data)
+                };
+                return TemplateEngine.TemplateEnginesPerLocale[CultureInfo.CurrentUICulture.Name].ExpandTemplate(name + ".Text", input).ToArray();
+            }
+            else
+            {
+                return base.ParseReplies(name, data);
+            }
         }
     }
 }

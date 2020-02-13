@@ -17,6 +17,7 @@
     <Content Remove="Content\PointOfInterestDetailsWithRoute.json" />
     <Content Remove="Content\PointOfInterestOverview.1.0.json" />
     <Content Remove="Content\PointOfInterestOverview.json" />
+    <Content Remove="Content\PointOfInterestOverviewContainee.json" />
     <Content Remove="Content\PointOfInterestOverviewContainer.1.0.json" />
     <Content Remove="Content\PointOfInterestOverviewContainer.json" />
   </ItemGroup>
@@ -32,6 +33,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Content\PointOfInterestDetailsWithRoute.1.0.json" />
     <EmbeddedResource Include="Content\PointOfInterestDetailsWithRoute.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\PointOfInterestOverviewContainee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\PointOfInterestOverview.1.0.json" />

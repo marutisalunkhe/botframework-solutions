@@ -429,21 +429,7 @@ namespace PointOfInterestSkill.Tests.Flow
             };
         }
 
-        private new string[] ParseReplies(string name, StringDictionary data = null)
-        {
-            if (name == Responses.Shared.Responses.MultipleLocationsFound)
-            {
-                var input = new
-                {
-                    Data = EngineWrapper.Convert(data)
-                };
-                return TemplateEngine.TemplateEnginesPerLocale[CultureInfo.CurrentUICulture.Name].ExpandTemplate(name + ".Text", input).ToArray();
-            }
-            else
-            {
-                return base.ParseReplies(name, data);
-            }
-        }
+
 
         private void AssertSameId(IMessageActivity activity, IList<string> cardIds = null)
         {

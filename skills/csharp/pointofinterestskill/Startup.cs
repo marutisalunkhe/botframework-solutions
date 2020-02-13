@@ -148,7 +148,7 @@ namespace PointOfInterestSkill
                 localizedTemplates.Add(locale, localeTemplateFiles);
             }
 
-            services.AddSingleton(new EngineWrapper(localizedTemplates, settings.DefaultLocale ?? "en-us"));
+            services.AddSingleton(new LocaleTemplateEngineManager(localizedTemplates, settings.DefaultLocale ?? "en-us"));
 
             // register dialogs
             services.AddTransient<MainDialog>();
